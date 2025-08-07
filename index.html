@@ -4,237 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaaf Academy - Online Quran Teaching</title>
-    <script src="./cdn/tailwind.js"></script>
-    <script src="./cdn/gsap.min.js"></script>
-    <script src="./cdn/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700&family=Reem+Kufi+Fun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/output.css">
     <style>
-        :root {
-            --primary: #5E3023;
-            --secondary: #895737;
-            --accent: #4A7C59;
-            --light: #F7F3E3;
-            --dark: #1A1A1A;
-        }
         a,
-        button {
-        cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg")
-            12 0,
-            pointer;
-        }
-                
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-            cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b239d7aeb290a31ac5_cursor-default%402x.svg")
-            2 0,
-            auto;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Reem Kufi Fun', sans-serif;
-        }
-    
-        
-        .highlight {
-            position: relative;
-            display: inline-block;
-            z-index: 1;
-        }
-        
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30%;
-            background-color: var(--accent);
-            opacity: 0.3;
-            z-index: -1;
-            transition: all 0.3s ease;
-        }
-        
-        .highlight:hover::after {
-            height: 100%;
-            opacity: 0.2;
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-        }
-        
-        .section-rounded {
-            border-radius: 1rem;
-        }
-        
-        @media (min-width: 1024px) {
-            .section-rounded {
-                border-radius: 2rem;
-            }
-        }
-        
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 100;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .masked-div {
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C20,40 40,60 100,100 L100,0 Z" fill="black"/></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C20,40 40,60 100,100 L100,0 Z" fill="black"/></svg>');
-            -webkit-mask-size: cover;
-            mask-size: cover;
-            -webkit-mask-position: center;
-            mask-position: center;
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-        }
-        
-        .quran-icon {
-            width: 24px;
-            height: 24px;
-            background-color: var(--accent);
-            position: relative;
-        }
-        
-        .quran-icon::before, .quran-icon::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: var(--light);
-            border-radius: 50%;
-        }
-        
-        .quran-icon::before {
-            top: 4px;
-            left: 4px;
-        }
-        
-        .quran-icon::after {
-            bottom: 4px;
-            right: 4px;
-        }
-        
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .scroll-indicator span {
-            display: block;
-            width: 20px;
-            height: 20px;
-            border-bottom: 2px solid var(--accent);
-            border-right: 2px solid var(--accent);
-            transform: rotate(45deg);
-            margin: -10px;
-            animation: scroll-down 1.5s infinite;
-        }
-        
-        .scroll-indicator span:nth-child(2) {
-            animation-delay: -0.2s;
-        }
-        
-        .scroll-indicator span:nth-child(3) {
-            animation-delay: -0.4s;
-        }
-        
-        @keyframes scroll-down {
-            0% {
-                opacity: 0;
-                transform: rotate(45deg) translate(-10px, -10px);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: rotate(45deg) translate(10px, 10px);
-            }
-        }
-        
-        .verse-card {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .verse-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(74,124,89,0.1) 0%, rgba(74,124,89,0) 70%);
-            transform: scale(0);
-            transition: transform 0.6s ease-out;
-        }
-        
-        .verse-card:hover::before {
-            transform: scale(1);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        .teacher-card {
-            perspective: 1000px;
-        }
-        
-        .teacher-inner {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .teacher-card:hover .teacher-inner {
-            transform: rotateY(10deg);
-        }
-        
-        .teacher-front, .teacher-back {
-            backface-visibility: hidden;
-        }
-        
-        .teacher-back {
-            transform: rotateY(180deg);
-        }
+button {
+  cursor: url("assets/cursors/pointer.png") 12 0, pointer;
+}
+
+body {
+  cursor: url("assets/cursors/arrow.png") 2 0, auto;
+}
     </style>
 </head>
 <body class="antialiased">
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/923453021754" class="floating-whatsapp bg-[#25D366] text-white p-4 rounded-full shadow-lg">
+    <a href="https://wa.me/923453021754" class="floating-whatsapp bg-[#25D366] text-white size-12 flex items-center justify-center rounded-full shadow-lg">
         <i class="fab fa-whatsapp text-2xl"></i>
     </a>
     
+
+    <div class="preloader ">
+        <svg width="60" class="animate-pulse duration-100" height="60"xmlns="http://www.w3.org/2000/svg" role="img" viewBox="131.60 130.35 228.80 198.80">
+            <g id="#fbede6ff">
+                <path style="fill: var(--primary)"
+                    d="M 187.09 184.36 C 187.91 184.34 189.55 184.31 190.36 184.29 C 189.30 185.63 188.19 186.94 187.04 188.21 C 187.04 186.93 187.06 185.64 187.09 184.36 Z" />
+            </g>
+            <g id="#010101ff" style="fill: var(--primary)">
+                <path
+                    d="M 161.81 135.27 C 167.85 134.63 173.94 135.01 180.00 134.91 C 185.72 135.03 191.48 134.59 197.18 135.29 C 195.31 137.83 191.45 136.26 189.12 138.16 C 186.76 139.99 186.99 143.29 186.93 145.96 C 187.04 158.35 186.82 170.73 187.04 183.12 C 189.14 182.71 191.80 183.20 193.27 181.28 C 204.81 168.49 216.28 155.63 227.83 142.84 C 229.06 141.51 230.60 138.98 228.40 137.77 C 225.34 136.53 221.91 137.03 218.78 136.07 C 220.05 135.18 221.46 134.79 222.99 134.89 C 230.78 134.90 238.58 134.94 246.37 134.93 C 246.19 135.33 245.82 136.15 245.64 136.55 C 240.33 136.77 234.46 137.46 230.85 141.85 C 218.63 155.18 206.78 168.85 194.65 182.26 C 197.68 183.57 198.94 186.32 199.64 189.35 C 203.96 192.86 210.32 193.22 214.92 190.05 C 223.00 201.67 230.94 213.38 239.00 225.02 C 240.72 227.57 242.78 230.01 245.55 231.48 C 248.22 232.95 251.38 232.85 254.19 233.96 C 251.73 235.56 248.75 234.88 246.00 235.02 C 240.16 234.94 233.84 235.59 228.64 232.37 C 222.64 228.71 219.12 222.40 215.12 216.84 C 209.39 208.37 203.38 200.07 197.78 191.51 C 196.26 191.88 194.70 192.82 193.11 192.30 C 191.00 191.95 190.13 189.80 189.01 188.28 C 188.25 189.46 186.85 190.48 186.96 192.04 C 186.86 202.70 186.97 213.37 186.91 224.04 C 186.98 226.53 186.79 229.40 188.64 231.37 C 190.87 233.89 195.36 231.88 197.20 234.73 C 185.42 235.16 173.58 235.18 161.79 234.73 C 162.88 232.54 165.72 233.39 167.66 232.67 C 170.81 232.21 171.95 228.76 171.83 225.98 C 171.90 213.75 171.82 201.51 171.86 189.28 C 157.06 195.90 145.46 209.05 140.42 224.43 C 135.47 239.29 136.73 256.13 143.93 270.06 C 151.11 284.17 164.16 295.18 179.33 299.75 C 195.31 304.80 213.43 302.55 227.69 293.75 C 241.03 284.63 252.54 272.98 261.92 259.85 C 277.02 239.12 287.15 215.19 302.87 194.88 C 311.40 184.13 327.62 180.85 339.71 187.27 C 348.30 191.64 354.57 200.35 355.77 209.94 C 357.17 219.80 353.27 230.24 345.65 236.67 C 339.73 241.91 331.70 244.32 323.86 244.05 C 320.24 250.33 322.41 257.69 323.99 264.23 C 326.30 275.38 329.43 286.55 329.09 298.03 C 328.61 304.96 325.66 311.41 322.45 317.46 C 321.29 319.45 320.03 321.88 317.59 322.46 C 305.66 325.62 293.20 324.29 281.01 324.75 C 275.22 324.46 268.63 326.03 263.58 322.40 C 260.82 320.31 261.09 316.46 261.55 313.42 C 262.47 308.62 263.65 303.84 265.42 299.28 C 265.79 299.21 266.51 299.06 266.87 298.99 C 268.31 300.90 269.12 303.51 271.47 304.55 C 274.11 305.75 277.10 305.70 279.95 305.83 C 292.78 305.77 305.66 306.75 318.46 305.47 C 320.98 305.02 324.42 303.26 323.84 300.19 C 320.59 283.35 315.68 266.90 311.54 250.27 C 310.72 245.68 309.07 240.62 311.34 236.19 C 312.31 233.95 314.07 232.16 316.04 230.76 C 319.92 233.93 321.47 239.45 325.42 242.47 C 339.76 243.13 353.14 231.29 354.36 217.01 C 356.03 203.77 347.06 190.33 334.24 186.71 C 323.05 183.16 309.91 187.52 303.08 197.07 C 284.09 222.55 272.56 253.19 250.32 276.31 C 241.24 285.38 231.82 294.77 219.63 299.53 C 205.04 305.29 188.20 305.43 173.68 299.34 C 157.87 292.97 145.11 279.62 139.43 263.55 C 136.66 256.37 136.40 248.60 136.04 241.01 C 136.26 218.22 151.13 196.82 171.77 187.53 C 171.95 173.34 171.81 159.15 171.85 144.96 C 171.80 142.44 171.78 139.22 169.24 137.84 C 167.00 136.31 163.37 137.79 161.81 135.27 M 187.09 184.36 C 187.06 185.64 187.04 186.93 187.04 188.21 C 188.19 186.94 189.30 185.63 190.36 184.29 C 189.55 184.31 187.91 184.34 187.09 184.36 Z" />
+                <path
+                    d="M 278.49 268.56 C 280.31 261.17 285.79 254.98 292.63 251.79 C 293.30 254.16 293.97 256.54 294.59 258.94 C 291.50 260.65 286.62 261.03 285.60 265.01 C 287.88 270.27 295.37 267.56 298.70 271.40 C 301.81 278.79 296.50 287.59 289.27 290.07 C 283.54 291.86 277.61 289.29 272.95 286.02 C 278.79 284.37 285.12 284.00 290.40 280.74 C 287.90 277.27 282.77 279.02 279.83 276.14 C 277.52 274.35 277.95 271.07 278.49 268.56 Z" />
+            </g>
+        </svg>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed w-full z-50  bg-[#F7F3E3] bg-opacity-90 backdrop-blur-sm py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
@@ -285,8 +92,8 @@
     </div>
     
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        <div class="container mx-auto px-6 flex flex-col mt-[10rem] text-center items-center">
+    <section id="home" class="h-screen bg-[#F7F3E3] flex justify-center relative rounded-b-[4rem] md:rounded-b-[6rem] overflow-hidden pt-20">
+        <div class="container mx-auto px-6 flex flex-col mt-[10rem]  text-center items-center">
             <div class="lg:w-1/2 mb-12 lg:mb-0">
                 <h1 class="text-4xl md:text-6xl font-bold text-[#5E3023] mb-6 leading-tight">
                     Learn <span class="highlight">Quran</span> with <span class="highlight">Tajweed</span> from Certified <span class="highlight">Hafiza</span>
@@ -294,7 +101,7 @@
                 <p class="text-lg md:text-xl text-[#895737]  mb-8 max-w-lg mx-auto">
                     Kaaf Academy offers personalized online Quran classes with qualified teachers. Start your spiritual journey today.
                 </p>
-                <div class="flex md:justify-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <div class="flex  md:justify-center flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                     <a href="#courses" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white px-8 py-3 rounded-full text-center transition-colors">
                         Explore Courses
                     </a>
@@ -304,16 +111,9 @@
                 </div>
             </div>
             
-            <div class="relative mt-10">
+            <div class="absolute bottom-0 md:-bottom-[20rem]">
                 <div class="relative">
-                    <img src="hero.png" alt="Quran Learning" class="w-full rounded-2xl object-cover">
-                </div>
-                <div class="w-full max-w-4xl absolute bottom-10 left-1/2 -translate-x-1/2 mx-auto verse-card bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-2xl text-center">
-                    <div class="text-[#4A7C59] text-4xl mb-4">"</div>
-                    <p class="text-xl md:text-2xl text-[#5E3023] mb-6">
-                        And We have certainly made the Qur'an easy for remembrance, so is there any who will remember?
-                    </p>
-                    <p class="text-[#895737]">- Surah Al-Qamar 54:17</p>
+                    <img src="./assets/images/hero/hero.png" alt="Quran Learning" class="w-full rounded-2xl object-cover">
                 </div>
             </div>
         </div>
@@ -346,7 +146,7 @@
                         Learn proper pronunciation and articulation of Quranic verses with rules of Tajweed.
                     </p>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm text-[#4A7C59]">From $30/month</span>
+                        <span class="text-sm text-[#4A7C59]">From Rs.5,646/month</span>
                         <a href="#" class="text-[#4A7C59] hover:text-[#3a6a4a]">
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -363,7 +163,7 @@
                         Deep dive into the meanings and interpretations of the Quranic verses.
                     </p>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm text-[#4A7C59]">From $40/month</span>
+                        <span class="text-sm text-[#4A7C59]">From Rs8400/month</span>
                         <a href="#" class="text-[#4A7C59] hover:text-[#3a6a4a]">
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -380,7 +180,7 @@
                         Memorization of the Holy Quran with proper techniques and revision schedules.
                     </p>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm text-[#4A7C59]">From $50/month</span>
+                        <span class="text-sm text-[#4A7C59]">From Rs11,200/month</span>
                         <a href="#" class="text-[#4A7C59] hover:text-[#3a6a4a]">
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -397,7 +197,7 @@
                         Foundation course for beginners to learn Arabic alphabets and basic Tajweed.
                     </p>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm text-[#4A7C59]">From $25/month</span>
+                        <span class="text-sm text-[#4A7C59]">From Rs4000/month</span>
                         <a href="#" class="text-[#4A7C59] hover:text-[#3a6a4a]">
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -414,8 +214,8 @@
     </section>
     
     <!-- Features Section -->
-    <section class="bg-white px-6 ">
-        <div class="container mx-auto p-20   rounded-[6rem] bg-[#F7F3E3]">
+    <section class="bg-white md:px-6 ">
+        <div class="container mx-auto py-20 px-6 md:p-20 rounded-[4rem] md:rounded-[6rem] bg-[#F7F3E3]">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-[#5E3023] mb-4">Why Choose <span class="highlight">Kaaf Academy</span></h2>
                 <p class="text-lg text-[#895737] max-w-2xl mx-auto">
@@ -427,7 +227,7 @@
                 <!-- Feature 1 -->
                 <div class="card-hover bg-white p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                        <div class="bg-[#4A7C59] bg-opacity-10 size-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fas fa-user-graduate text-[#4A7C59] text-xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#5E3023]">Certified Teachers</h3>
@@ -440,7 +240,7 @@
                 <!-- Feature 2 -->
                 <div class="card-hover bg-white p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                        <div class="bg-[#4A7C59] bg-opacity-10 size-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fas fa-laptop-house text-[#4A7C59] text-xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#5E3023]">Flexible Schedule</h3>
@@ -453,7 +253,7 @@
                 <!-- Feature 3 -->
                 <div class="card-hover bg-white p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                        <div class="bg-[#4A7C59] bg-opacity-10 size-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fas fa-user-friends text-[#4A7C59] text-xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#5E3023]">One-on-One Sessions</h3>
@@ -466,7 +266,7 @@
                 <!-- Feature 4 -->
                 <div class="card-hover bg-white p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                        <div class="bg-[#4A7C59] bg-opacity-10 size-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fas fa-video text-[#4A7C59] text-xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#5E3023]">Recorded Lectures</h3>
@@ -479,7 +279,7 @@
                 <!-- Feature 5 -->
                 <div class="card-hover bg-white p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                        <div class="bg-[#4A7C59] bg-opacity-10 size-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fas fa-chart-line text-[#4A7C59] text-xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#5E3023]">Progress Tracking</h3>
@@ -492,7 +292,7 @@
                 <!-- Feature 6 -->
                 <div class="card-hover bg-white p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                        <div class="bg-[#4A7C59] bg-opacity-10 size-12 flex items-center justify-center rounded-full mr-4">
                             <i class="fas fa-globe text-[#4A7C59] text-xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#5E3023]">Global Community</h3>
@@ -518,10 +318,10 @@
                         Her teaching methodology focuses on understanding the divine message while perfecting the pronunciation and memorization of the Quran. She has successfully taught hundreds of students from around the world.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/kadacedemy_00" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white p-3 rounded-full transition-colors">
+                        <a href="https://www.instagram.com/kadacedemy_00" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white size-12 flex items-center justify-center rounded-full transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/923453021754" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white p-3 rounded-full transition-colors">
+                        <a href="https://wa.me/923453021754" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white size-12 flex items-center justify-center rounded-full transition-colors">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
@@ -530,7 +330,7 @@
                 <div class="lg:w-1/2 relative">
                     <div class="relative">
                         <div class="w-full h-full bg-[#4A7C59] rounded-2xl absolute -left-4 -top-4 -z-10"></div>
-                        <img src="https://pollinations.ai/prompt/a%20female%20muslim%20teacher%20wearing%20hijab%20teaching%20quran%20to%20students,%20warm%20and%20professional%20atmosphere,%20minimal%20brown%20color%20palette,%20soft%20lighting,%20islamic%20art%20in%20background?nologo=true" 
+                        <img src="./assets/images/about.png" 
                              alt="Hafiza Kainat Noor" 
                              class="w-full rounded-2xl object-cover shadow-lg">
                     </div>
@@ -540,8 +340,8 @@
     </section>
     
     <!-- Teaching Methodology -->
-    <section class="px-6 bg-white">
-        <div class="bg-[#F7F3E3] container mx-auto p-20   rounded-[6rem]">
+    <section class="md:px-6 bg-white">
+        <div class="bg-[#F7F3E3] container mx-auto py-20 px-6 md:p-20 rounded-[4rem] md:rounded-[6rem]">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-[#5E3023] mb-4">Our <span class="highlight">Teaching</span> Methodology</h2>
                 <p class="text-lg text-[#895737] max-w-2xl mx-auto">
@@ -631,7 +431,7 @@
                 <div class="card-hover bg-[#F7F3E3] p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://pollinations.ai/prompt/a%20middle-aged%20muslim%20man%20with%20beard,%20professional%20headshot,%20minimal%20background,%20warm%20expression?nologo=true" 
+                            <img src="./assets/images/avatars/avatar (1).jpg" 
                                  alt="Student" 
                                  class="w-full h-full object-cover">
                         </div>
@@ -656,7 +456,7 @@
                 <div class="card-hover bg-[#F7F3E3] p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://pollinations.ai/prompt/a%20young%20muslim%20woman%20wearing%20hijab,%20professional%20headshot,%20minimal%20background,%20confident%20expression?nologo=true" 
+                            <img src="./assets/images/avatars/avatar (3).jpg" 
                                  alt="Student" 
                                  class="w-full h-full object-cover">
                         </div>
@@ -681,7 +481,7 @@
                 <div class="card-hover bg-[#F7F3E3] p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://pollinations.ai/prompt/a%10year%20old%20muslim%20boy,%20smiling,%20professional%20headshot,%20minimal%20background?nologo=true" 
+                            <img src="./assets/images/avatars/avatar (2).jpg" 
                                  alt="Student" 
                                  class="w-full h-full object-cover">
                         </div>
@@ -706,8 +506,8 @@
     </section>
     
     <!-- FAQ Section -->
-    <section class="px-6 bg-white ">
-        <div class="container mx-auto p-20 bg-[#F7F3E3] rounded-[6rem]">
+    <section class="md:px-6 bg-white ">
+        <div class="container mx-auto bg-[#F7F3E3] py-20 px-6 md:p-20 rounded-[4rem] md:rounded-[6rem]">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-[#5E3023] mb-4">Frequently <span class="highlight">Asked</span> Questions</h2>
                 <p class="text-lg text-[#895737] max-w-2xl mx-auto">
@@ -791,7 +591,7 @@
                         
                         <div class="space-y-6">
                             <div class="flex items-start">
-                                <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                                <div class="bg-[#4A7C59] bg-opacity-10 size-10 flex items-center justify-center rounded-full mr-4">
                                     <i class="fas fa-phone text-[#4A7C59]"></i>
                                 </div>
                                 <div>
@@ -801,7 +601,7 @@
                             </div>
                             
                             <div class="flex items-start">
-                                <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                                <div class="bg-[#4A7C59] bg-opacity-10 size-10 flex items-center justify-center rounded-full mr-4">
                                     <i class="fas fa-envelope text-[#4A7C59]"></i>
                                 </div>
                                 <div>
@@ -811,7 +611,7 @@
                             </div>
                             
                             <div class="flex items-start">
-                                <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                                <div class="bg-[#4A7C59] bg-opacity-10 size-10 flex items-center justify-center rounded-full mr-4">
                                     <i class="fab fa-whatsapp text-[#4A7C59]"></i>
                                 </div>
                                 <div>
@@ -821,7 +621,7 @@
                             </div>
                             
                             <div class="flex items-start">
-                                <div class="bg-[#4A7C59] bg-opacity-10 p-3 rounded-full mr-4">
+                                <div class="bg-[#4A7C59] bg-opacity-10 size-10 flex items-center justify-center rounded-full mr-4">
                                     <i class="fab fa-instagram text-[#4A7C59]"></i>
                                 </div>
                                 <div>
@@ -878,12 +678,11 @@
     </section>
     
     <!-- Footer -->
-    <footer class="bg-[#5E3023] text-white py-12">
+    <footer class="bg-[#5E3023] container mx-auto rounded-t-[4rem] md:rounded-t-[6rem] text-white p-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <a href="#" class="flex items-center space-x-2 mb-4">
-                        <div class="quran-icon rounded-sm"></div>
                         <span class="text-2xl font-bold font-['Reem_Kufi_Fun']">Kaaf Academy</span>
                     </a>
                     <p class="text-[#F7F3E3] opacity-80">
@@ -915,13 +714,13 @@
                 <div>
                     <h4 class="text-lg font-bold mb-4">Connect With Us</h4>
                     <div class="flex space-x-4 mb-4">
-                        <a href="https://www.instagram.com/kadacedemy_00" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white p-3 rounded-full transition-colors">
+                        <a href="https://www.instagram.com/kadacedemy_00" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white size-12 flex items-center justify-center rounded-full transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://wa.me/923453021754" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white p-3 rounded-full transition-colors">
+                        <a href="https://wa.me/923453021754" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white size-12 flex items-center justify-center rounded-full transition-colors">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="#" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white p-3 rounded-full transition-colors">
+                        <a href="#" class="bg-[#4A7C59] hover:bg-[#3a6a4a] text-white size-12 flex items-center justify-center rounded-full transition-colors">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -936,155 +735,81 @@
             </div>
         </div>
     </footer>
-    
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('nav button');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuCloseBtn = mobileMenu.querySelector('button');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        mobileMenuCloseBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            document.body.style.overflow = '';
-        });
-        
-        // FAQ Toggle
-        const faqToggles = document.querySelectorAll('.faq-toggle');
-        
-        faqToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const content = toggle.nextElementSibling;
-                const icon = toggle.querySelector('i');
-                
-                content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-            });
-        });
-        
-        
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Hero section animation
-        gsap.from('nav', {
-            duration: 1,
-            y: -50,
-            opacity: 0,
-            ease: "power3.out"
-        });
+    <style>
+        .card-hover {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* equivalent to power2.out */
+  transform-style: preserve-3d; /* Optional: for 3D effects */
+  will-change: transform; /* Performance hint */
+}
 
-        const header = document.querySelector("#home h1")
-        const text = header.innerText.split("").map(e => `<span>${e}</span>`).join("")
-        header.innerHTML = text;
-        
-        gsap.from('#home h1 *', {
-            scrollTrigger: {
-                trigger: '#home',
-                start: 'top center',
-                toggleActions: 'play none none none'
-            },
-            y: "-100%",
-            duration: 1,
-            stagger: .2,
-            opacity: 0,
-            ease: "power3.out"
-        });
-        
-        gsap.from('#home p', {
-            scrollTrigger: {
-                trigger: '#home',
-                start: 'top center',
-                toggleActions: 'play none none none'
-            },
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            delay: 0.3,
-            ease: "power3.out"
-        });
-        
-        gsap.from('#home a', {
-            scrollTrigger: {
-                trigger: '#home',
-                start: 'top center',
-                toggleActions: 'play none none none'
-            },
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            delay: 0.6,
-            ease: "power3.out",
-            stagger: 0.2
-        });
-        
-        gsap.from('#home img', {
-            scrollTrigger: {
-                trigger: '#home',
-                start: 'top center',
-                toggleActions: 'play none none none'
-            },
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            delay: 0.9,
-            ease: "power3.out"
-        });
-        
-        // // Section animations
-        // const sections = document.querySelectorAll('section');
-        
-        // sections.forEach(section => {
-        //     gsap.from(section.querySelectorAll('h2, h3, p, .card-hover'), {
-        //         scrollTrigger: {
-        //             trigger: section,
-        //             start: 'top 70%',
-        //             toggleActions: 'play none none none'
-        //         },
-        //         duration: 0.8,
-        //         y: 30,
-        //         opacity: 0,
-        //         ease: "power3.out",
-        //         stagger: 0.2
-        //     });
-        // });
-        
-        // Card hover animations
-        const cards = document.querySelectorAll('.card-hover');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleX = (y - centerY) / 20;
-                const angleY = (centerX - x) / 20;
-                
-                gsap.to(card, {
-                    duration: 0.5,
-                    rotationX: angleX,
-                    rotationY: angleY,
-                    ease: "power2.out"
+    </style>
+    <script>
+        document.body.style.overflow='hidden'
+        window.addEventListener("load", () => {
+            const preloader = document.querySelector(".preloader");
+
+            // Start the circular reveal
+            preloader.classList.add("reveal");
+
+            // Optional: wait for the transition to finish, then remove
+            preloader.addEventListener("transitionend", () => {
+                preloader.remove(); // or use .style.display = "none"
+                document.body.style.overflow='scroll'
+            });
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('nav button');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuCloseBtn = mobileMenu.querySelector('button');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mobileMenuCloseBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = 'scroll';
+            });
+            
+            // FAQ Toggle
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('i');
+                    
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
                 });
             });
             
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    duration: 0.5,
-                    rotationX: 0,
-                    rotationY: 0,
-                    ease: "power2.out"
+            
+            // Card hover animations
+            const cards = document.querySelectorAll('.card-hover');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+                    
+                    card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `rotateX(${0}deg) rotateY(${0}deg)`;
+
                 });
             });
-        });
+        })
     </script>
 </body>
 </html>

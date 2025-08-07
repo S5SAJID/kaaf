@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  background-color: var(--light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  clip-path: circle(150% at 50% 50%);
+  transition: clip-path 1.2s ease-in-out;
+  overflow: hidden;
+}
+
+.preloader.reveal {
+  clip-path: circle(0% at 50% 50%);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.card-hover {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+:root {
+  --primary: #5e3023;
+  --secondary: #895737;
+  --accent: #4a7c59;
+  --light: #f7f3e3;
+  --dark: #1a1a1a;
+}
+
+
+body {
+  font-family: "Lato", sans-serif;
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Reem Kufi Fun", sans-serif;
+}
+
+.highlight {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background-color: var(--accent);
+  opacity: 0.3;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.highlight:hover::after {
+  height: 100%;
+  opacity: 0.2;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+}
+
+.section-rounded {
+  border-radius: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .section-rounded {
+    border-radius: 2rem;
+  }
+}
+
+.floating-whatsapp {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.masked-div {
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C20,40 40,60 100,100 L100,0 Z" fill="black"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 C20,40 40,60 100,100 L100,0 Z" fill="black"/></svg>');
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.quran-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--accent);
+  position: relative;
+}
+
+.quran-icon::before,
+.quran-icon::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--light);
+  border-radius: 50%;
+}
+
+.quran-icon::before {
+  top: 4px;
+  left: 4px;
+}
+
+.quran-icon::after {
+  bottom: 4px;
+  right: 4px;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scroll-indicator span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  transform: rotate(45deg);
+  margin: -10px;
+  animation: scroll-down 1.5s infinite;
+}
+
+.scroll-indicator span:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+.scroll-indicator span:nth-child(3) {
+  animation-delay: -0.4s;
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-10px, -10px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(10px, 10px);
+  }
+}
+
+.verse-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.verse-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(74, 124, 89, 0.1) 0%,
+    rgba(74, 124, 89, 0) 70%
+  );
+  transform: scale(0);
+  transition: transform 0.6s ease-out;
+}
+
+.verse-card:hover::before {
+  transform: scale(1);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.teacher-card {
+  perspective: 1000px;
+}
+
+.teacher-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.teacher-card:hover .teacher-inner {
+  transform: rotateY(10deg);
+}
+
+.teacher-front,
+.teacher-back {
+  backface-visibility: hidden;
+}
+
+.teacher-back {
+  transform: rotateY(180deg);
+}
