@@ -1,9 +1,9 @@
-# Kaaf Academy – Online Quran Teaching Website
+# Kaaf Academym Online Quran Teaching Website
 
 Welcome to the **Kaaf Academy** website repository. This responsive, single-page site presents the services of Kaaf Academy – an online platform that offers personalised Quran learning with certified teachers.
 
 <p align="center">
-  <img alt="Kaaf Academy Hero" src="assets/images/hero/hero.png" width="600"/>
+  <img alt="Kaaf Academy Hero" src="assets/images/Mockups/intro.png" width="600"/>
 </p>
 
 ---
@@ -22,6 +22,12 @@ Welcome to the **Kaaf Academy** website repository. This responsive, single-page
 | **Contact** | WhatsApp floating button, contact form & social icons |
 | **UX Enhancements** | Pre-loader SVG animation, custom cursor icons, smooth scrolling, card hover effects |
 
+
+<p align="center">
+  <img alt="Kaaf Academy Hero" src="assets/images/Mockups/image.png" width="600"/>
+</p>
+
+
 ## 🛠️ Tech Stack
 
 * **HTML5** – semantic markup
@@ -32,6 +38,14 @@ Welcome to the **Kaaf Academy** website repository. This responsive, single-page
 
 > Tailwind was built locally with the CLI:  
 > `npx tailwindcss -i ./assets/css/style.css -o ./assets/css/output.css --watch`
+
+
+
+<p align="center">
+  <img alt="Kaaf Academy Hero" src="assets/images/Mockups/front.png" width="600"/>
+<img alt="Kaaf Academy Hero" src="assets/images/Mockups/Side.png" width="600"/>
+<img alt="Kaaf Academy Hero" src="assets/images/Mockups/mockup-logo.png" width="600"/>
+</p>
 
 ## 📂 Project Structure
 
